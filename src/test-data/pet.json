@@ -1,0 +1,23 @@
+{
+    "id": 18,
+    "category": {
+        "id": 72,
+        "name": "Dora Cummings I"
+    },
+    "name": "doggie",
+    "photoUrls": [
+        "https://loremflickr.com/400/400?lock=3907031323230738",
+        "https://loremflickr.com/400/400?lock=3513583706573026"
+    ],
+    "tags": [
+        {
+            "id": 90,
+            "name": "Ken Schimmel"
+        },
+        {
+            "id": 90,
+            "name": "Josephine Douglas"
+        }
+    ],
+    "status": "available"
+}

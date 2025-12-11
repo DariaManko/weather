@@ -1,0 +1,21 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:dev": "cross-env ENV=dev npx playwright test",
+    "test:dev-ui": "cross-env ENV=dev npx playwright test --ui",
+    "test:staging": "cross-env ENV=staging npx playwright test",
+    "test:staging-ui": "cross-env ENV=staging npx playwright test --ui"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1",
+    "cross-env": "^10.1.0",
+    "zod": "^4.1.13"
+  }
+}
