@@ -1,6 +1,11 @@
 pipeline {
 	agent { label 'jenkins_agent_python' }
 
+	environment {
+		FORCE_COLOR = '0'
+		NO_COLOR = '1'
+	}
+
     stages {
 		stage('Docker Check') {
 			steps {
