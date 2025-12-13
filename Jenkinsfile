@@ -1,6 +1,39 @@
 pipeline {
-    agent any
+	agent { label 'jenkins_agent_python' }
+
     stages {
-        // stages will be added here
+		stage('Docker Check') {
+			steps {
+				sh 'echo $DOCKER_HOST'
+				sh 'docker version'
+			}
+		}
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Run Playwright Tests') {
+			steps{
+				script {
+					docker.image('mcr.microsoft.com/playwright:v1.57.0-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm') {
+						sh 'npm ci'
+						sh 'NO_COLOR=1 npm run test:dev'
+					}
+				}
+			}
+        }
     }
+    post {
+        success {
+        	echo '✅ Tests passed successfully!'
+			slackSend channel: '#playwright-runs',
+                      message: "Build ${currentBuild.fullDisplayName} succeeded! ${currentBuild.URL}"
+        }
+        failure {
+        	echo '❌ Some tests failed. Check the report for details.'
+			slackSend channel: '#playwright-runs',
+                      message: "Build ${currentBuild.fullDisplayName} failed! ${currentBuild.URL}"
+        }
+	}
 }
