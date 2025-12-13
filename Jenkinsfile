@@ -16,7 +16,7 @@ pipeline {
         stage('Run Playwright Tests') {
 			steps{
 				script {
-					docker.image('mcr.microsoft.com/playwright:v1.57.0-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm') {
+					docker.image('mcr.microsoft.com/playwright:v1.56.1-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm') {
 						sh 'npm ci'
 						sh 'NO_COLOR=1 npm run test:dev'
 					}
