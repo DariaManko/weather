@@ -1,11 +1,6 @@
 pipeline {
 	agent { label 'jenkins_agent_python' }
 
-	environment {
-		FORCE_COLOR = '0'
-		NO_COLOR = '1'
-	}
-
     stages {
 		stage('Docker Check') {
 			steps {
@@ -22,8 +17,10 @@ pipeline {
 			steps{
 				script {
 					docker.image('mcr.microsoft.com/playwright:v1.56.1-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm') {
+						unset FORCE_COLOR
+          				export NO_COLOR=1
 						sh 'npm ci'
-						sh 'NO_COLOR=1 npm run test:dev'
+						sh 'npm run test:dev'
 					}
 				}
 			}
