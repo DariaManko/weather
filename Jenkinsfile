@@ -16,10 +16,12 @@ pipeline {
         stage('Run Playwright Tests') {
 			steps{
 				script {
-					docker.image('mcr.microsoft.com/playwright:v1.56.1-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm') {
+					def ws = pwd()
+					docker.image('mcr.microsoft.com/playwright:v1.56.1-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm -v ${ws}:${ws}') {
 						sh '''
 							export CI=true
 							npm ci
+							cd ${ws}
 							npm run test:dev
 						'''
 					}
