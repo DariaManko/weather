@@ -18,6 +18,7 @@ pipeline {
 				script {
 					docker.image('mcr.microsoft.com/playwright:v1.56.1-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm') {
 						sh '''
+							export CI=true
 							export NO_COLOR=1
 							export NPM_CONFIG_COLOR=false
 							npm ci
