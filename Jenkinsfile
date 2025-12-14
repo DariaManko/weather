@@ -19,7 +19,6 @@ pipeline {
 					docker.image('mcr.microsoft.com/playwright:v1.56.1-noble').inside('--entrypoint="" -u root:root -v npm_pw_cache:/root/.npm') {
 						sh '''
 							export CI=true
-							mkdir -p reports
 							npm ci
 							npm run test:dev
 						'''
@@ -34,7 +33,7 @@ pipeline {
 	                    allowMissing: false,
 	                    alwaysLinkToLastBuild: true,
 	                    keepAll: true,
-	                    reportDir: 'reports',
+	                    reportDir: 'playwright-report',
 	                    reportFiles: 'index.html',
 	                    reportName: 'Tests report'
 	                ])
