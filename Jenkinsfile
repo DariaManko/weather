@@ -26,9 +26,9 @@ pipeline {
 				}
 			}
         }
-		stage('Publish Report') {
-            steps {
-                publishHTML([
+    }
+    post {
+		publishHTML([
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
@@ -36,10 +36,6 @@ pipeline {
                     reportFiles: 'index.html',
                     reportName: 'HTML Report'
                 ])
-            }
-        }
-    }
-    post {
         success {
         	echo '✅ Tests passed successfully!'
 			slackSend channel: '#playwright-runs',
