@@ -26,6 +26,18 @@ pipeline {
 				}
 			}
         }
+		stage('Publish Report') {
+            steps {
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'path/to/report/folder',
+                    reportFiles: 'index.html',
+                    reportName: 'HTML Report'
+                ])
+            }
+        }
     }
     post {
         success {
