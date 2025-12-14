@@ -41,12 +41,12 @@ pipeline {
         success {
         	echo '✅ Tests passed successfully!'
 			slackSend channel: '#playwright-runs',
-                      message: "Build ${currentBuild.fullDisplayName} succeeded! ${currentBuild.URL}"
+                      message: "Build ${currentBuild.fullDisplayName} succeeded! ${env.BUILD_URL}"
         }
         failure {
         	echo '❌ Some tests failed. Check the report for details.'
 			slackSend channel: '#playwright-runs',
-                      message: "Build ${currentBuild.fullDisplayName} failed! ${currentBuild.URL}"
+                      message: "Build ${currentBuild.fullDisplayName} failed! ${env.BUILD_URL}"
         }
 	}
 }
