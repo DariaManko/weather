@@ -28,14 +28,16 @@ pipeline {
         }
     }
     post {
-		publishHTML([
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'path/to/report/folder',
-                    reportFiles: 'index.html',
-                    reportName: 'HTML Report'
-                ])
+		always{
+			publishHTML([
+	                    allowMissing: false,
+	                    alwaysLinkToLastBuild: true,
+	                    keepAll: true,
+	                    reportDir: 'path/to/report/folder',
+	                    reportFiles: 'index.html',
+	                    reportName: 'HTML Report'
+	                ])
+		}
         success {
         	echo '✅ Tests passed successfully!'
 			slackSend channel: '#playwright-runs',
