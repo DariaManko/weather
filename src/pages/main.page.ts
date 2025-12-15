@@ -30,7 +30,9 @@ export class MainPage {
 
     async checkForecastWrapSection() {
         await expect(this.forecastWrap).toBeVisible();
-        expect(this.forecastWrap.locator('.current-weather-caption').textContent().toString().trim()).toEqual('Погодана найближчий час');
+
+        expect((await this.forecastWrap.locator('.current-weather-caption').textContent())?.trim()).toBe('Погодана найближчий час');
+        
         for (const item of this.forecastWrapItems) {
             await expect(this.forecastWrap, item).toContainText(item);
         }
